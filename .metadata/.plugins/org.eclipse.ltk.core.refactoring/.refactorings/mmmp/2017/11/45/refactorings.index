@@ -1,0 +1,45 @@
+1510020461971	Rename package 'go.mltm.nsdi.cm.cmmn'
+1510020489591	Rename package 'go.mltm.nsdi.cm.cmmn.dataaccess'
+1510020504575	Rename package 'go.mltm.nsdi.cm.cmmn.util'
+1510020514942	Rename package 'go.mltm.nsdi.cm.cmmn.web'
+1510020608795	Rename package 'go.mltm.nsdi.cm.service'
+1510020622357	Rename package 'go.mltm.nsdi.cm.service.impl'
+1510020635334	Rename package 'go.mltm.nsdi.cm.web'
+1510020809036	Rename resource 'cm'
+1510029298505	Copy file
+1510029318803	Rename resource 'validator.xml'
+1510041515311	Copy file
+1510041530193	Copy file
+1510041758810	Copy file
+1510042067818	Move files
+1510042211700	Copy file
+1510042452443	Copy file
+1510042524058	Copy file
+1510044028734	Copy file
+1510044040964	Copy file
+1510046970887	Move file
+1510047032584	Move file
+1510047118691	Move file
+1510047274640	Rename resource 'log4j2.xml'
+1510103776840	Rename resource 'log4j.xml'
+1510104929828	Delete element
+1510105048587	Rename resource 'log4j2.xml'
+1510105079006	Rename resource 'log4j.xml'
+1510121048459	Move file
+1510121383965	Move file
+1510121391397	Delete element
+1510204862877	Copy folder
+1510204877331	Delete elements
+1510204924493	Delete element
+1510204949629	Copy compilation unit
+1510205080245	Rename resource 'cm01.jsp'
+1510209547557	Copy compilation unit
+1510209581753	Rename type 'CmBbsVO'
+1510274291474	Delete element
+1510274294935	Delete element
+1510274702571	Move files
+1510279320585	Delete element
+1510280200063	Delete element
+1510280668425	Delete element
+1510280669605	Delete element
+1510292162345	Copy file

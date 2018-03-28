@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CmBbs">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="CmBbsVO" type="go.etri.mp.stm.service.CmBbsVO"/>
+
+	<select id="CmBbsDAO.selectCmList" parameterClass="CmBbsVO" resultClass="egovMap">
+
+			SELECT
+				ID, NAME, DESCRIPTION, USE_YN, REG_USER,BOARD_NO,TITLE
+			FROM SAMPLE
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				ID LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				NAME LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			ORDER BY BOARD_NO DESC
+			LIMIT #recordCountPerPage# OFFSET #firstIndex#		
+	</select>
+	
+	<select id="CmBbsDAO.selectCmListTotCnt" parameterClass="CmBbsVO" resultClass="int">
+
+			SELECT COUNT(*) totcnt
+			FROM SAMPLE
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				ID LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				NAME LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<select id="CmBbsDAO.selectCmDetailList" parameterClass="CmBbsVO" resultClass="egovMap">
+			SELECT
+				ID, NAME, DESCRIPTION, USE_YN, REG_USER,TITLE,BOARD_NO
+			FROM SAMPLE
+			WHERE BOARD_NO=#boardNo#
+	</select>
+	
+	<select id="CmBbsDAO.selectCmDetailFileList" parameterClass="CmBbsVO" resultClass="egovMap">
+			SELECT
+				FILE_SN, ORIGINAL_FILE_NAME, STORED_FILE_NAME, FILE_SIZE
+			FROM TB_FILE
+			WHERE BOARD_NO=#boardNo#
+			ORDER BY FILE_SN ASC
+	</select>
+	
+	<select id="CmBbsDAO.selectFileNo" parameterClass="CmBbsVO" resultClass="java.lang.String" >
+			SELECT AUTO_INCREMENT
+			  FROM information_schema.TABLES
+			 WHERE TABLE_SCHEMA = "ispdman"
+			   AND TABLE_NAME = "sample"
+	</select>
+	
+	<insert id="CmBbsDAO.insertSample">
+		<![CDATA[
+			INSERT INTO SAMPLE 
+				( ID
+				  , TITLE
+				  , DESCRIPTION
+				  )
+			VALUES ( #id#
+				  , #title#
+				  , #description# )
+		]]>
+	</insert>
+	
+	<insert id="CmBbsDAO.insertFile" >
+		<selectKey keyProperty="boardNo" resultClass="java.lang.String" >
+	        SELECT AUTO_INCREMENT
+			  FROM information_schema.TABLES
+			 WHERE TABLE_SCHEMA = "ispdman"
+			   AND TABLE_NAME = "sample"
+	    </selectKey>
+		<![CDATA[
+			INSERT INTO TB_FILE 
+				( FILE_SN
+				  , BOARD_NO
+				  , ORIGINAL_FILE_NAME
+				  ,STORED_FILE_NAME
+				  ,FILE_SIZE
+				  ,CREA_DTM
+				  ,CREA_ID
+				  ,DEL_GB
+				 )
+			VALUES ( #fileSn#
+				  , #boardNo#
+				  , #originalFileName#
+				  , #storedFileName#
+				  , #fileSize#
+				  , now()
+				  , #creaId#
+				  , 'N' )
+		]]>
+	</insert>
+	
+	<update id="CmBbsDAO.updateSample">
+		<![CDATA[
+			UPDATE SAMPLE
+			SET DESCRIPTION=#description#,
+				  TITLE = #title#
+			WHERE BOARD_NO=#boardNo#
+		]]>
+	</update>
+	
+	<delete id="CmBbsDAO.deleteSample">
+		<![CDATA[
+			DELETE FROM SAMPLE 
+			WHERE BOARD_NO=#boardNo#
+		]]>
+	</delete>
+	
+	<delete id="CmBbsDAO.deleteFile">
+			DELETE FROM TB_FILE
+			WHERE BOARD_NO=#boardNo# 
+			<isNotEmpty property="fileSn">
+				AND FILE_SN=#fileSn#
+			</isNotEmpty>
+	</delete>
+</sqlMap>

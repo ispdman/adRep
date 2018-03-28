@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 타일즈 참고사항 
+	  타일즈의 definition name 은 호출하는 주소(ex. ~.do) 기반이 아니라
+	  리턴되는 페이지 기반임.
+	  아마 사이트메쉬(sitemesh)의 이와 비슷한 설정부분은 호출하는 주소 기반일 거임.
+	 -->
+	<!-- 타일즈 미적용 --> 
+	<definition name="no-tiles" template="/WEB-INF/jsp/layout/no-layout.jsp"> 
+	 	<put-attribute name="noTemplate" value="" /> 
+	</definition>
+	<!-- 타일즈 미적용 Page --> 
+	<definition name="*/*_ajax" extends="no-tiles"> 
+	 	<put-attribute name="noTemplate" value="/jsp/{1}/{2}_ajax.jsp" /> 
+	</definition>
+	
+	<!-- default-layout 
+	<definition name="default-layout" template="/WEB-INF/jsp/layout/default-layout.jsp"> 
+		<put-attribute name="title" value="default title" />
+		 <put-attribute name="header" value="/WEB-INF/jsp/layout/default-header.jsp" /> 
+		 <put-attribute name="footer" value="/WEB-INF/jsp/layout/default-footer.jsp" /> 
+	</definition>
+
+	<definition name="*/*" extends="default-layout"> 
+	 	<put-attribute name="contents" value="/WEB-INF/jsp/{1}/{2}.jsp" /> 
+	</definition>
+	--> 
+	
+	<!-- default-layout Page 
+	<definition name="*/*" extends="default-layout"> 
+	 	<put-attribute name="contents" value="/WEB-INF/jsp/{1}/{2}.jsp" /> 
+	</definition>
+	--> 
+	
+	<!-- serve-layout --> 
+	<definition name="serve-layout" template="/WEB-INF/jsp/layout/serve-layout.jsp"> 
+		<put-attribute name="title" value="Service Traffic Monitoring" />
+		 <put-attribute name="header" value="/WEB-INF/jsp/layout/serve-header.jsp" /> 
+		 <put-attribute name="left" value="/WEB-INF/jsp/layout/serve-left.jsp" /> 
+		 <put-attribute name="footer" value="/WEB-INF/jsp/layout/default-footer.jsp" /> 
+	</definition>
+	
+	<definition name="*/*" extends="serve-layout"> 
+	 	<put-attribute name="contents" value="/jsp/{1}/{2}.jsp" /> 
+	</definition>
+</tiles-definitions>
